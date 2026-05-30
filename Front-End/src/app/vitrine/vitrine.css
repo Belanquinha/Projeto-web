@@ -1,0 +1,12 @@
+.btn-laranja-custom {
+    background-color: #FA812F; 
+    border-color: #fff;    
+    border-width: 3px;
+    color: #fff;             
+}
+
+.btn-laranja-custom:hover {
+    background-color: rgb(228, 116, 3); 
+    border-color: #fff;
+    color: #fff;
+}

@@ -1,0 +1,30 @@
+/* You can add global styles to this file, and also import other style files */
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color:#fff;
+    color: black;
+    font-family: microsoft yahei, sans-serif;
+}
+
+
+.btn-laranja-custom {
+    background-color: #FA812F; 
+    border-color: #fff;    
+    border-width: 3px;
+    color: #fff;             
+}
+
+.btn-laranja-custom:hover {
+    background-color: rgb(228, 116, 3); 
+    border-color: #fff;
+    color: #fff;
+}
+
+.cor-laranja-custom {
+    color: #FA812F;             
+}
