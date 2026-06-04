@@ -3,7 +3,7 @@
     <nav class="d-flex align-items-center justify-content-between gap-3">
       
       <a href="/">
-        <div class="flex-shrink-0" style="max-width: 180px;">
+        <div class="flex-shrink-0" style="max-width: 240px;">
           <picture>
             <source media="(max-width: 520px)" srcset="Serve-Mobilia.svg">
         
@@ -12,33 +12,35 @@
         </div>
       </a>
 
-      <div class="flex-grow-1" style="max-width: 600px;">
-        <form action="/buscar" method="GET" class="m-0">
-          <div class="input-group">
-            <input type="text" class="form-control" placeholder="Busca" aria-label="Busca" name="query">
-            <button class="btn btn-primary d-flex align-items-center btn-laranja-custom" type="submit">
-              <span class="material-symbols-outlined">search</span>
-            </button>
-          </div>
-        </form>
-      </div>
-
-      <div class="text-end flex-shrink-0">
-        <a class="nav-link fw-semibold text-white" href="cadastro">Cadastro</a>
-      </div>
+      <nav class="text-end flex-shrink-0">
+        <a class="nav-link fw-semibold text-white" href="carrinho">Carrinho</a> 
+        <a class="nav-link fw-semibold text-white" href="login">Login</a>
+        <!-- adicionar os icones -->
+      </nav>
 
     </nav>
   </div>
 </header>
 
-    <h4>Aq vai o menu ainda to fazendo</h4>
-    <hr>
+<div class="d-flex align-items-center gap-4">
+  <div class="flex-grow-1" style="max-width: 600px;">
+    <form action="/buscar" method="GET" class="m-0">
+      <div class="input-group">
+        <input type="text" class="form-control" placeholder="Busca" aria-label="Busca" name="query">
+        <button class="btn btn-primary d-flex align-items-center btn-laranja-custom" type="submit">
+          <span class="material-symbols-outlined">search</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+  <hr>
 
 
 <router-outlet />
 
 <footer class="mt-4 p-5 ">
-    <h4>Footer :)</h4>
+  <h4>Footer :)</h4>
 </footer>
 
 

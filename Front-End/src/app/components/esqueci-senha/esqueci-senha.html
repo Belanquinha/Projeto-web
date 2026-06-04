@@ -1,0 +1,44 @@
+<main class="container shadow p-3 mb-5 bg-body-tertiary rounded">
+    <h2 style="align-self: center;">Recuperar Senha</h2> <br>
+    <div>
+
+        <div>
+            <label class="form-label" for="email">Digite seu Email</label> <br>
+            <input class="form-control" id="email" type="email" > <br>
+        </div>
+
+        <div>
+            <label class="form-label" for="senha">Digite sua nova senha</label> <br>
+            <input class="form-control" id="senha" type="password" > <br>
+        </div>
+
+        <button type="button" class="btn btn-laranja-custom" data-bs-toggle="modal" data-bs-target="#myModal">Confirmar</button>
+    </div>
+
+
+
+    <!-- o modal -->
+    <div class="modal" id="myModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+        <!-- Modal Header -->
+        <div class="modal-header">
+            <h4 class="modal-title">Cadastrado com Sucesso</h4>
+            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+
+        <!-- Modal body -->
+        <div class="modal-body">
+            Seu codigo:
+        </div>
+
+        <!-- Modal footer -->
+        <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+        </div>
+
+        </div>
+    </div>
+    </div>
+</main>

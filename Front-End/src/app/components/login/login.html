@@ -1,0 +1,48 @@
+<main class="container shadow p-3 mb-5 bg-body-tertiary rounded">
+    <h2 style="align-self: center;">Login</h2> <br>
+    <div>
+
+        <div>
+            <label class="form-label" for="email">Email</label> <br>
+            <input class="form-control" id="email" type="email" [(ngModel)]="obj.email"> <br>
+        </div>
+
+        <div>
+            <label class="form-label" for="senha">Senha</label> <br>
+            <input class="form-control" id="senha" type="password" [(ngModel)]="obj.senha"> <br>
+        </div>
+
+        <!-- Botão de voltar -->
+        <button type="button" (click)="gravar();" class="btn btn-laranja-custom" data-bs-toggle="modal" data-bs-target="#myModal">Entra</button>
+    </div>
+
+
+    <h3>Não possui uma Conta? </h3><a href="cadastro">Crie uma</a>
+    <a href="esqueci-senha">Esqueci a senha</a>
+
+    <!-- o modal -->
+    <div class="modal" id="myModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+        <!-- Modal Header -->
+        <div class="modal-header">
+            <h4 class="modal-title">Cadastrado com Sucesso</h4>
+            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+
+        <!-- Modal body -->
+        <div class="modal-body">
+            Seu codigo: {{mensagem}}
+        </div>
+
+        <!-- Modal footer -->
+        <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+        </div>
+
+        </div>
+    </div>
+    </div>
+</main>
+
