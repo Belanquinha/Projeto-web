@@ -1,44 +1,58 @@
-<main class="container shadow p-3 mb-5 bg-body-tertiary rounded">
-    <h2 style="align-self: center;">Recuperar Senha</h2> <br>
-    <div>
-
-        <div>
-            <label class="form-label" for="email">Digite seu Email</label> <br>
-            <input class="form-control" id="email" type="email" > <br>
-        </div>
-
-        <div>
-            <label class="form-label" for="senha">Digite sua nova senha</label> <br>
-            <input class="form-control" id="senha" type="password" > <br>
-        </div>
-
-        <button type="button" class="btn btn-laranja-custom" data-bs-toggle="modal" data-bs-target="#myModal">Confirmar</button>
+<div class="container d-flex justify-content-center align-items-center py-4">
+  
+  <main class="card shadow p-4 p-md-5 bg-body-tertiary rounded-4 w-100" style="max-width: 450px;">
+    
+    <div class="text-center mb-4">
+      <h2 class="fw-bold text-dark mb-1">Recuperar Senha</h2>
     </div>
 
+    <form>
+      <div class="mb-3">
+        <label class="form-label text-secondary mb-1" for="email">Digite seu E-mail</label>
+        <input class="form-control form-control-lg" id="email" type="email" placeholder="seu@email.com" name="email">
+      </div>
+
+      <div class="mb-4">
+        <label class="form-label text-secondary mb-1" for="senha">Digite sua nova senha</label>
+        <input class="form-control form-control-lg" id="senha" type="password" placeholder="Nova senha" name="senha">
+      </div>
+
+      <button type="button" class="btn btn-lg btn-laranja-custom w-100 text-white shadow-sm" data-bs-toggle="modal" data-bs-target="#myModal">
+        Confirmar Alteração
+      </button>
+
+      <div class="text-center mt-3">
+        <a href="login" class="text-decoration-none small text-muted">Voltar para o Login</a>
+      </div>
+    </form>
+
+  </main>
+</div>
 
 
-    <!-- o modal -->
-    <div class="modal" id="myModal">
-    <div class="modal-dialog">
-        <div class="modal-content">
+<!-- modal -->
+<div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content rounded-4 border-0 shadow">
+      
+      <div class="modal-header border-0 bg-success text-white rounded-top-4">
+        <h5 class="modal-title fw-bold" id="myModalLabel">
+          <span class="material-symbols-outlined align-middle me-2">check_circle</span>Senha Alterada!
+        </h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
 
-        <!-- Modal Header -->
-        <div class="modal-header">
-            <h4 class="modal-title">Cadastrado com Sucesso</h4>
-            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-        </div>
+      <div class="modal-body p-4 text-center">
+        <p class="fs-5 mb-1 text-dark">Sua senha foi redefinida com sucesso.</p>
+        <p class="text-muted small">Agora você já pode utilizar suas novas credenciais para acessar o sistema.</p>
+      </div>
 
-        <!-- Modal body -->
-        <div class="modal-body">
-            Seu codigo:
-        </div>
+      <div class="modal-footer border-0 justify-content-center pb-4">
+        <button type="button" class="btn btn-primary px-4 fw-semibold btn-laranja-custom text-white border-0" data-bs-dismiss="modal">
+          Ir para o Login
+        </button>
+      </div>
 
-        <!-- Modal footer -->
-        <div class="modal-footer">
-            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-        </div>
-
-        </div>
     </div>
-    </div>
-</main>
+  </div>
+</div>

@@ -4,5 +4,5 @@ export class Cliente {
     email: string = "";
     senha: string = "";
     telefone: string = "";
-    logradouro: string = "";
+    cpf: number = 0;
 }

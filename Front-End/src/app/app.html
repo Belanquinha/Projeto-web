@@ -1,31 +1,36 @@
-<header class="header py-3 shadow mb-1 ">
+<header class="header py-3 shadow mb-1">
   <div class="container-fluid"> 
-    <nav class="d-flex align-items-center justify-content-between gap-3">
+    <nav class="d-flex align-items-center justify-content-between gap-3 flex-wrap flex-md-nowrap">
       
-      <a href="/">
-        <div class="flex-shrink-0" style="max-width: 240px;">
+      <a href="/" class="flex-shrink-0">
+        <div style="max-width: 240px;">
           <picture>
             <source media="(max-width: 520px)" srcset="Serve-Mobilia.svg">
-        
             <img src="Serve Mobilia Logo com nome.svg" alt="Logo Marca" class="img-fluid batata">
           </picture>
         </div>
       </a>
 
-      <nav class="text-end flex-shrink-0">
-        <a class="nav-link fw-semibold text-white" href="carrinho">Carrinho</a> 
-        <a class="nav-link fw-semibold text-white" href="login">Login</a>
-        <!-- adicionar os icones -->
-      </nav>
+      <div class="d-flex align-items-center gap-3 flex-shrink-0">
+        <a class="nav-link fw-semibold text-white d-flex align-items-center gap-1" href="carrinho">
+          <span class="material-symbols-outlined">shopping_cart</span>
+          <span>Carrinho</span>
+        </a> 
+        
+        <a class="nav-link fw-semibold text-white d-flex align-items-center gap-1" href="login">
+          <span class="material-symbols-outlined">account_circle</span>
+          <span>Login</span>
+        </a>
+      </div>
 
     </nav>
   </div>
 </header>
 
-<div class="d-flex align-items-center gap-4">
-  <div class="flex-grow-1" style="max-width: 600px;">
+<div class="d-flex justify-content-center">
+  <div class="flex-grow-1 mx-3" style="max-width: 600px; min-width: 250px;">
     <form action="/buscar" method="GET" class="m-0">
-      <div class="input-group">
+      <div class="input-group barradepesquisa">
         <input type="text" class="form-control" placeholder="Busca" aria-label="Busca" name="query">
         <button class="btn btn-primary d-flex align-items-center btn-laranja-custom" type="submit">
           <span class="material-symbols-outlined">search</span>
@@ -34,13 +39,10 @@
     </form>
   </div>
 </div>
-  <hr>
-
+<hr>
 
 <router-outlet />
-
-<footer class="mt-4 p-5 ">
-  <h4>Footer :)</h4>
+<hr>
+<footer class="mt-4 p-5">
+  <h5>AMS - 2026</h5>
 </footer>
-
-

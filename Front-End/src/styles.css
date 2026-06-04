@@ -28,3 +28,15 @@ body {
 .cor-laranja-custom {
     color: #FA812F;             
 }
+
+
+
+
+.barradepesquisa {
+    margin-top: 12px;
+}
+
+hr {
+    margin-top: 20px;
+    margin-bottom: 10px;
+}

@@ -1,23 +1,61 @@
-<h2>Carrinho</h2>
+<div class="container my-5">
+  <h2 class="fw-bold mb-4">Seu Carrinho</h2>
 
-<tr>
-    <th>Item</th>
-    <th>Quantidade</th>
-    <th>Valor</th>
-</tr>
+<div class="row g-4">
+  <div class="col-lg-8">
+    <div class="card shadow-sm p-3 mb-3">
+      <div class="row fw-bold text-muted pb-2 mb-3 border-bottom d-none d-md-flex">
+        <div class="col-md-6">Item</div>
+        <div class="col-md-3 text-center">Quantidade</div>
+        <div class="col-md-3 text-end">Valor</div>
+      </div>
 
-<tr>
-    <td>Item</td>
-    <td>Quantidade</td>
-    <td>Valor</td>
-</tr>
+      <!-- onde o nome do produto e imagem dele vai -->
+      <div class="row align-items-center mb-3 py-2 border-bottom">
+        <div class="col-12 col-md-6 d-flex align-items-center mb-3 mb-md-0">
+          <img src="https://via.placeholder.com/80" alt="Produto" class="img-fluid rounded me-3" style="width: 80px; height: 80px; object-fit: cover;">
+          <div>
+            <h5 class="mb-1 fw-semibold">Cama Box Casal</h5>
+          </div>
+        </div>
 
-<tr>
-    <td><h2>Total</h2></td>
-    <td><h2>$$$</h2></td>
-</tr>
+      <!-- quantidade -->
+      <div class="col-6 col-md-3 text-start text-md-center">
+        <span class="d-md-none text-muted d-block fw-bold">Qtd:</span>
+        <div class="d-inline-flex align-items-center border rounded">
+         <input type="text" class="form-control form-control-sm text-center border-0" value="1" style="width: 40px; background: transparent;" readonly>
+        </div>
+      </div>
 
+      <!-- valor -->
+      <div class="col-6 col-md-3 text-end">
+        <span class="d-md-none text-muted d-block fw-bold">Preço:</span>
+        <span class="fw-bold text-dark">R$ 1.200,00</span>
+      </div>
+    </div>
 
-<button class="btn btn-lg w-100 py-3 fw-bold">Limpar Cesta</button>
-<button class="btn btn-lg btn-laranja-custom w-100 py-3 fw-bold">Finalizar</button>
+  </div>
+</div>
 
+    <div class="col-lg-4">
+      <div class="card shadow-sm p-4 bg-light border-0">
+        <h4 class="fw-bold mb-4">Resumo do Pedido</h4>
+      
+      
+        <!-- total -->
+        <div class="d-flex justify-content-between align-items-center mb-4">
+          <h4 class="fw m-0">Total</h4>
+          <h3 class="fw m-0 text-dark">R$ 1.200,00</h3>
+        </div>
+
+        <button class="btn btn-lg btn-laranja-custom w-100 py-3 fw-bold text-white shadow-sm mb-2">
+          Finalizar Compra
+        </button>
+        
+        <a href="/" class="btn btn-link w-100 text-decoration-none text-muted btn-sm mt-2">
+          Continuar Comprando
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

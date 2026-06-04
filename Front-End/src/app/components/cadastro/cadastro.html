@@ -1,65 +1,77 @@
-<main class="container shadow p-3 mb-5 bg-body-tertiary rounded">
-    <h2 style="align-self: center;">Cadastro</h2> <br>
-    <div>
-        <div class="mb-3 mt-3">
-            <label class="form-label" for="nome">Nome</label> <br>
-            <input class="form-control" id="nome" type="text" [(ngModel)]="obj.nome"> <br>
-        </div>
+<div class="container d-flex justify-content-center align-items-center min-vh-100 py-5">
+  
+  <main class="card shadow p-4 p-md-5 bg-body-tertiary rounded-4 w-100" style="max-width: 600px;">
+    
+    <div class="text-center mb-4">
+      <h2 class="fw-bold text-dark mb-1">Crie sua Conta</h2>
+    </div>
 
-        <div>
-            <label class="form-label" for="email">Email</label> <br>
-            <input class="form-control" id="email" type="email" [(ngModel)]="obj.email"> <br>
-        </div>
-
-        <div>
-            <label class="form-label" for="senha">Senha</label> <br>
-            <input class="form-control" id="senha" type="password" [(ngModel)]="obj.senha"> <br>
-        </div>
-        <div>
-            <label class="form-label" for="senha">Confirmar</label> <br>
-            <input class="form-control" id="senha" type="password" [(ngModel)]="obj.senha"> <br>
-        </div>
+    <form>
+      <div class="row g-3">
         
-
-        <div>
-            <label class="form-label" for="telefone">Telefone</label> <br>
-            <input class="form-control" id="telefone" type="text" [(ngModel)]="obj.telefone"> <br>
+        <div class="col-12">
+          <label class="form-label fw text-secondary mb-1" for="nome">Nome Completo</label>
+          <input class="form-control form-control-lg" id="nome" type="text" placeholder="Seu nome" [(ngModel)]="obj.nome" name="nome">
         </div>
 
-        <div>
-            <label class="form-label" for="telefone">CPF</label> <br>
-            <input class="form-control" id="telefone" type="text" [(ngModel)]="obj.telefone"> <br>
+        <div class="col-12">
+          <label class="form-label fw text-secondary mb-1" for="email">E-mail</label>
+          <input class="form-control form-control-lg" id="email" type="email" placeholder="seu@email.com" [(ngModel)]="obj.email" name="email">
         </div>
-        
-        <hr>
 
-        <button type="button" (click)="gravar();" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#myModal">Cadastrar</button>
+        <div class="col-md-6">
+          <label class="form-label fw text-secondary mb-1" for="senha">Senha</label>
+          <input class="form-control form-control-lg" id="senha" type="password" placeholder="Crie uma senha" [(ngModel)]="obj.senha" name="senha">
+        </div>
+
+        <div class="col-md-6">
+          <label class="form-label fw text-secondary mb-1" for="telefone">Telefone</label>
+          <input class="form-control form-control-lg" id="telefone" type="text" placeholder="(00) 00000-0000" [(ngModel)]="obj.telefone" name="telefone">
+        </div>
+
+        <div class="col-md-6">
+          <label class="form-label fw text-secondary mb-1" for="cpf">CPF</label>
+          <input class="form-control form-control-lg" id="cpf" type="text" placeholder="000.000.000-00" [(ngModel)]="obj.cpf" name="cpf">
+        </div>
+
+      </div>
+
+      <hr class="my-4 text-muted">
+
+      <button type="button" (click)="gravar();" class="btn btn-lg btn-laranja-custom w-100 fw-bold text-white shadow-sm" data-bs-toggle="modal" data-bs-target="#myModal">
+        Cadastrar
+      </button>
+
+      <div class="text-center mt-3">
+        <a href="login" class="text-decoration-none small text-muted">Já tem uma conta? <span style="color: #FA812F;">Faça login</span></a>
+      </div>
+    </form>
+
+  </main>
+</div>
+
+
+<!-- modal -->
+<div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content rounded-4 border-0 shadow">
+      
+      <div class="modal-header border-0 bg-success text-white rounded-top-4">
+        <h5 class="modal-title fw-bold" id="myModalLabel">
+          <span class="material-symbols-outlined align-middle me-2">check_circle</span>Cadastrado com Sucesso
+        </h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+      <div class="modal-body p-4 text-center">
+        <p class="fs-5 mb-1 text-dark">Sua conta foi criada perfeitamente!</p>
+        <p class="text-muted">Seu código identificador é: <strong class="text-success">{{mensagem}}</strong></p>
+      </div>
+
+      <div class="modal-footer border-0 justify-content-center pb-4">
+        <button type="button" class="btn btn-secondary px-4 fw-semibold" data-bs-dismiss="modal">Fechar</button>
+      </div>
+
     </div>
-
-
-    <!-- o modal -->
-    <div class="modal" id="myModal">
-    <div class="modal-dialog">
-        <div class="modal-content">
-
-        <!-- Modal Header -->
-        <div class="modal-header">
-            <h4 class="modal-title">Cadastrado com Sucesso</h4>
-            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-        </div>
-
-        <!-- Modal body -->
-        <div class="modal-body">
-            Seu codigo: {{mensagem}}
-        </div>
-
-        <!-- Modal footer -->
-        <div class="modal-footer">
-            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-        </div>
-
-        </div>
-    </div>
-    </div>
-</main>
-
+  </div>
+</div>
