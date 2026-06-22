@@ -1,27 +1,42 @@
 <div class="container d-flex justify-content-center align-items-center py-4">
-  
   <div class="card shadow p-4 p-md-5 bg-body-tertiary rounded-4 w-100" style="max-width: 450px;">
-    
     <div class="text-center mb-4">
       <h2 class="fw-bold text-dark mb-1">Login</h2>
     </div>
 
-    <form>
+    <form #loginForm="ngForm" (ngSubmit)="tentarLogin(loginForm)" novalidate>
       <div class="mb-3">
         <label class="form-label fw-semibold text-secondary" for="email">E-mail</label>
-        <input class="form-control form-control-lg" id="email" type="email" placeholder="seu@email.com" [(ngModel)]="obj.email" name="email">
+        <input
+          class="form-control form-control-lg"
+          id="email"
+          type="email"
+          placeholder="seu@email.com"
+          [(ngModel)]="obj.email"
+          name="email"
+        >
       </div>
 
       <div class="mb-3">
         <div class="d-flex justify-content-between align-items-center mb-1">
           <label class="form-label fw-semibold text-secondary mb-0" for="senha">Senha</label>
-          
         </div>
-        <input class="form-control form-control-lg" id="senha" type="password" placeholder="Sua senha" [(ngModel)]="obj.senha" name="senha">
+        <input
+          class="form-control form-control-lg"
+          id="senha"
+          type="password"
+          placeholder="Sua senha"
+          [(ngModel)]="obj.senha"
+          name="senha"
+        >
       </div>
-                <a href="esqueci-senha" class="text-decoration-none small text-muted">Esqueceu a senha?</a>
 
-      <button type="button" (click)="gravar();" class="btn btn-lg btn-laranja-custom w-100 fw-bold text-white shadow-sm mt-3" data-bs-toggle="modal" data-bs-target="#myModal">
+      <a href="esqueci-senha" class="text-decoration-none small text-muted">Esqueceu a senha?</a>
+
+      <button
+        type="submit"
+        class="btn btn-lg btn-laranja-custom w-100 fw-bold text-white shadow-sm mt-3"
+      >
         Entrar
       </button>
     </form>
@@ -30,43 +45,36 @@
 
     <div class="text-center">
       <p class="mb-0 text-secondary">
-        Não possui uma conta? 
-        <a href="cadastro" class="fw-bold text-decoration-none " style="color: #FA812F">Crie uma agora</a>
+        Não possui uma conta?
+        <a href="cadastro" class="fw-bold text-decoration-none" style="color: #FA812F">Crie uma agora</a>
       </p>
     </div>
-
-
-    
-</div>
+  </div>
 </div>
 
 
 
+<div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content rounded-4 border-0 shadow">
+      
+      <div class="modal-header border-0 rounded-top-4" [className]="'modal-header border-0 rounded-top-4 ' + classeModal">
+        <h5 class="modal-title fw-bold" id="loginModalLabel">
+          {{ tituloModal }}
+        </h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
 
+      <div class="modal-body p-4 text-center">
+        <p class="fs-5 mb-0 text-dark">{{ mensagemModal }}</p>
+      </div>
 
-    <!-- o modal -->
-    <div class="modal" id="myModal">
-    <div class="modal-dialog">
-        <div class="modal-content">
+      <div class="modal-footer border-0 justify-content-center pb-4">
+        <button type="button" [className]="'btn px-4 fw-semibold text-white ' + (classeModal.includes('bg-success') ? 'btn-success' : 'btn-laranja-custom')" data-bs-dismiss="modal">
+          Fechar
+        </button>
+      </div>
 
-        <!-- Modal Header -->
-        <div class="modal-header">
-            <h4 class="modal-title">Cadastrado com Sucesso</h4>
-            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-        </div>
-
-        <!-- Modal body -->
-        <div class="modal-body">
-            Seu codigo: {{mensagem}}
-        </div>
-
-        <!-- Modal footer -->
-        <div class="modal-footer">
-            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-        </div>
-
-        </div>
     </div>
-    </div>
-
-
+  </div>
+</div>

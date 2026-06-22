@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { Cliente } from '../../model/cliente';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, NgForm } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-cadastro',
@@ -9,23 +10,46 @@ import { CommonModule } from '@angular/common';
   templateUrl: './cadastro.html',
   styleUrl: './cadastro.css',
 })
+
 export class Cadastro {
-  mensagem : string = "";
-  obj: Cliente = new Cliente();
-  codigo: number = 0;
+  cliente: Cliente = new Cliente();
+  mensagemCadastro = '';
+  codigoCadastro: number | string = '';
 
-  gravar() {
-    const codigoMemoria = localStorage.getItem("codigoAtual");
+  constructor(private http: HttpClient) {}
 
-    if (codigoMemoria !== null) {
-      this.codigo = parseInt(codigoMemoria);
+  enviarCadastro(formCadastro: NgForm) {
+    const url = 'http://localhost:8060/perfils';
+
+    this.http.post<any>(url, this.cliente).subscribe({
+      next: (resposta) => {
+        console.log('Perfil salvo', resposta);
+
+        this.mensagemCadastro = 'Cadastro realizado com sucesso!';
+        this.codigoCadastro = resposta?.id || '';
+
+        // Limpa o formulário e reseta o objeto
+        formCadastro.resetForm();
+        this.cliente = new Cliente();
+        
+        this.abrirModal();
+      },
+      error: (erro) => {
+        console.error('Deu erro ao salvar: ', erro);
+        this.mensagemCadastro = 'Erro ao realizar cadastro.';
+        this.codigoCadastro = '';
+        
+        this.abrirModal();
+      }
+    });
+  }
+
+  // lógica do Modal 
+  private abrirModal() {
+    const modalElement = document.getElementById('myModal');
+    if (modalElement) {
+      const bootstrapModal = (window as any).bootstrap?.Modal?.getOrCreateInstance(modalElement);
+      bootstrapModal?.show();
     }
-
-    this.codigo ++
-    let json = JSON.stringify(this.obj); // serializar ou trocar uma texto em um formato json??
-  
-    localStorage.setItem("meuCliente", json);
-    localStorage.setItem("codigoAtual", (this.codigo).toString());
-    this.mensagem = this.codigo.toString();
   }
 }

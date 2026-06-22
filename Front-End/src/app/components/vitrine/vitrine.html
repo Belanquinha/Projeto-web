@@ -1,13 +1,16 @@
 <main class="container my-4">
+  <div *ngIf="lista.length === 0" class="text-center my-5 text-muted">
+    <p>Carregando produtos ou banco de dados vazio...</p>
+  </div>
 
-  <div class="row g-4 shadow p-3 mb-5 bg-body-tertiary rounded">
+  <div class="row g-4 shadow p-3 mb-5 bg-body-tertiary rounded" *ngIf="lista.length > 0">
     
     <div *ngFor="let obj of lista" class="col-6 col-md-6 col-lg-4 d-flex">
       
-      <div class="card h-100 w-100 d-flex flex-column shadow-sm bg-body-tertiary rounded" *ngIf="obj.quantidade > 0">
+      <div class="card h-100 w-100 d-flex flex-column shadow-sm bg-body-tertiary rounded">
         
-        <button (click)="verDetalhes(obj.codigo)" class="btn p-0 border-0">
-          <img src="img{{obj.codigo}}.webp" class="card-img-top img-fluid" alt="{{obj.nome}}">
+        <button (click)="verDetalhes(obj.id)" class="btn p-0 border-0">
+          <img src="img{{obj.id}}.webp" class="card-img-top img-fluid" alt="{{obj.nome}}">
         </button>
         
         <div class="card-body flex-grow-1">
@@ -19,6 +22,7 @@
             <button class="btn btn-laranja-custom fw-semibold px-3 w-100 w-sm-auto">Comprar</button>
         </div>
       </div>
+
     </div>
 
   </div>

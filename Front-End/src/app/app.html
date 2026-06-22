@@ -29,14 +29,25 @@
 
 <div class="d-flex justify-content-center">
   <div class="flex-grow-1 mx-3" style="max-width: 600px; min-width: 250px;">
-    <form action="/buscar" method="GET" class="m-0">
+    
+    <form (ngSubmit)="executarBusca()" class="m-0">
       <div class="input-group barradepesquisa">
-        <input type="text" class="form-control" placeholder="Busca" aria-label="Busca" name="query">
+        
+        <input 
+          type="text" 
+          class="form-control" 
+          placeholder="Busca" 
+          aria-label="Busca" 
+          name="pesquisa"
+          [(ngModel)]="termoPesquisa"
+        >
+        
         <button class="btn btn-primary d-flex align-items-center btn-laranja-custom" type="submit">
           <span class="material-symbols-outlined">search</span>
         </button>
       </div>
     </form>
+
   </div>
 </div>
 <hr>

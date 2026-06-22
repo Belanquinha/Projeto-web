@@ -6,39 +6,39 @@
       <h2 class="fw-bold text-dark mb-1">Crie sua Conta</h2>
     </div>
 
-    <form>
+    <form #cadastroForm="ngForm" (ngSubmit)="enviarCadastro(cadastroForm)">
       <div class="row g-3">
         
         <div class="col-12">
           <label class="form-label fw text-secondary mb-1" for="nome">Nome Completo</label>
-          <input class="form-control form-control-lg" id="nome" type="text" placeholder="Seu nome" [(ngModel)]="obj.nome" name="nome">
+          <input class="form-control form-control-lg" id="nome" type="text" placeholder="Seu nome" [(ngModel)]="cliente.nome" name="nome" required>
         </div>
 
         <div class="col-12">
           <label class="form-label fw text-secondary mb-1" for="email">E-mail</label>
-          <input class="form-control form-control-lg" id="email" type="email" placeholder="seu@email.com" [(ngModel)]="obj.email" name="email">
+          <input class="form-control form-control-lg" id="email" type="email" placeholder="seu@email.com" [(ngModel)]="cliente.email" name="email" required>
         </div>
 
         <div class="col-md-6">
           <label class="form-label fw text-secondary mb-1" for="senha">Senha</label>
-          <input class="form-control form-control-lg" id="senha" type="password" placeholder="Crie uma senha" [(ngModel)]="obj.senha" name="senha">
+          <input class="form-control form-control-lg" id="senha" type="password" placeholder="Crie uma senha" [(ngModel)]="cliente.senha" name="senha" required>
         </div>
 
         <div class="col-md-6">
           <label class="form-label fw text-secondary mb-1" for="telefone">Telefone</label>
-          <input class="form-control form-control-lg" id="telefone" type="text" placeholder="(00) 00000-0000" [(ngModel)]="obj.telefone" name="telefone">
+          <input class="form-control form-control-lg" id="telefone" type="text" placeholder="(00) 00000-0000" [(ngModel)]="cliente.telefone" name="telefone" required>
         </div>
 
         <div class="col-md-6">
           <label class="form-label fw text-secondary mb-1" for="cpf">CPF</label>
-          <input class="form-control form-control-lg" id="cpf" type="text" placeholder="000.000.000-00" [(ngModel)]="obj.cpf" name="cpf">
+          <input class="form-control form-control-lg" id="cpf" type="text" placeholder="000.000.000-00" [(ngModel)]="cliente.cpf" name="cpf" required>
         </div>
 
       </div>
 
       <hr class="my-4 text-muted">
 
-      <button type="button" (click)="gravar();" class="btn btn-lg btn-laranja-custom w-100 fw-bold text-white shadow-sm" data-bs-toggle="modal" data-bs-target="#myModal">
+      <button type="submit" class="btn btn-lg btn-laranja-custom w-100 fw-bold text-white shadow-sm">
         Cadastrar
       </button>
 
@@ -56,16 +56,19 @@
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content rounded-4 border-0 shadow">
       
-      <div class="modal-header border-0 bg-success text-white rounded-top-4">
+      <div class="modal-header border-0 btn-laranja-custom text-white rounded-top-4">
         <h5 class="modal-title fw-bold" id="myModalLabel">
-          <span class="material-symbols-outlined align-middle me-2">check_circle</span>Cadastrado com Sucesso
+          <!-- O ícone agora muda caso dê erro de cadastro -->
+          <span class="material-symbols-outlined align-middle me-2">
+            {{ mensagemCadastro === 'Erro ao realizar cadastro.' ? 'error' : 'check_circle' }}
+          </span>
+          {{ mensagemCadastro === 'Erro ao realizar cadastro.' ? 'Erro no Cadastro' : 'Cadastrado com Sucesso' }}
         </h5>
         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
 
       <div class="modal-body p-4 text-center">
-        <p class="fs-5 mb-1 text-dark">Sua conta foi criada perfeitamente!</p>
-        <p class="text-muted">Seu código identificador é: <strong class="text-success">{{mensagem}}</strong></p>
+        <p class="fs-5 mb-1 text-dark">{{ mensagemCadastro }}</p>
       </div>
 
       <div class="modal-footer border-0 justify-content-center pb-4">

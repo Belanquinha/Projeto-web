@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Produto } from '../../model/produto';
 import { CommonModule } from '@angular/common';
-
+import { HttpClient } from '@angular/common/http'; // Injetado HttpClient
 
 @Component({
   selector: 'app-pagina-produto',
@@ -10,74 +10,70 @@ import { CommonModule } from '@angular/common';
   templateUrl: './pagina-produto.html',
   styleUrl: './pagina-produto.css',
 })
-
 export class PaginaProduto implements OnInit {
   
-  codigoDaCaneta: string | null = '';
+  idPegou: number = -1;
+  produto: Produto = new Produto();
 
-  codigoPego: number = -1;
-
-  constructor(private route: ActivatedRoute) {}
-
+  constructor(
+    private route: ActivatedRoute,
+    private http: HttpClient,
+    private cdr: ChangeDetectorRef
+  ) {}
 
   ngOnInit(): void {
-    this.codigoDaCaneta = this.route.snapshot.paramMap.get('codigo');
+    // Pega o parâmetro definido na sua rota (seja 'codigo' ou 'id')
+    const idParam = this.route.snapshot.paramMap.get('codigo');
 
-    if (this.codigoDaCaneta !== null) {
-      this.codigoPego = parseInt(this.codigoDaCaneta)
+    if (idParam !== null) {
+      this.idPegou = parseInt(idParam);
+      this.carregarProdutoDoBackend(this.idPegou);
     }
   }
 
-  
+  carregarProdutoDoBackend(id: number) {
+    const url = `http://localhost:8060/produtos/${id}`;
 
-lista: Produto[] = [
-  {
-    codigo: 1,
-    nome: "Cama Box Casal Conjugada com Colchão de Molas",
-    descritivo: "O item número um para qualquer mudança. Esta cama box casal oferece a praticidade de uma estrutura única (base + colchão acoplado) de molas ensacadas, que se adaptam ao corpo. Revestida em tecido antiderrapante na parte superior e lateral em corino preto, garantindo higiene e facilidade de limpeza nos primeiros dias de mudança. Pés rosqueáveis de montagem imediata.",
-    valor: 1199.00,
-    promo: 899.90,
-    quantidade: 40
-  },
-  {
-    codigo: 2,
-    nome: "Guarda-Roupa Casal 4 Portas de Correr Prático",
-    descritivo: "Essencial para não deixar as roupas nas malas. Modelo compacto por fora e espaçoso por dentro, ideal para se adaptar a diferentes tamanhos de quarto. Possui duas portas de correr que economizam espaço de circulação, 3 gavetas internas com corrediças metálicas e cabideiros em alumínio. Acabamento em pintura UV de fácil conservação.",
-    valor: 850.00,
-    promo: 629.00,
-    quantidade: 25
-  },
-  {
-    codigo: 3,
-    nome: "Sofá 3 Lugares Fixo em Tecido Linho",
-    descritivo: "Para garantir o descanso na sala logo após a mudança. Este sofá de 3 lugares possui design clean e estrutura robusta em madeira de reflorestamento. Assento com espuma D26 e encosto fixo confortável. Por não ser retrátil, possui profundidade reduzida, passando facilmente por portas e elevadores estreitos durante o frete.",
-    valor: 1399.00,
-    promo: 999.00,
-    quantidade: 15
-  },
-  {
-    codigo: 4,
-    nome: "Mesa de Jantar 4 Lugares com Tampo de Vidro",
-    descritivo: "Item indispensável para as refeições na casa nova. Conjunto completo composto por uma mesa quadrada com tampo de vidro temperado e base em MDF, acompanhada por 4 cadeiras estofadas em tecido suede. Combina com qualquer estilo de cozinha ou sala de jantar e possui montagem simplificada.",
-    valor: 799.00,
-    promo: 579.90,
-    quantidade: 20
-  },
-  {
-    codigo: 5,
-    nome: "Rack para TV de até 55 Polegadas com Rodízios",
-    descritivo: "O primeiro móvel da sala de estar para organizar a TV e os aparelhos de internet. Conta com duas portas basculantes para esconder a fiação e nichos abertos para decorações. O grande diferencial para quem acabou de se mudar são os rodízios (rodinhas), que facilitam muito a movimentação do móvel na hora de limpar ou mudar o layout da sala.",
-    valor: 340.00,
-    promo: 219.90,
-    quantidade: 50
-  },
-  {
-    codigo: 6,
-    nome: "Armário de Cozinha Compacto Módulo Único",
-    descritivo: "A solução imediata para organizar panelas e mantimentos sem precisar de móveis planejados. Este armário suspenso possui 3 portas superiores (uma com vidro), nicho para micro-ondas e 2 portas inferiores com uma gaveta para talheres. Puxadores ergonômicos em plástico resistente e pés com regulagem de altura para pisos desnivelados.",
-    valor: 650.00,
-    promo: 449.90,
-    quantidade: 35
+    this.http.get<any>(url).subscribe({
+      next: (produtoDoBanco) => {
+        this.produto = produtoDoBanco;
+        console.log('Produto carregado com sucesso:', this.produto);
+        
+        // Força a atualização imediata dos textos no HTML
+        this.cdr.detectChanges();
+      },
+      error: (erro) => {
+        console.error('Erro ao buscar detalhes do produto: ', erro);
+      }
+    });
   }
-];
+
+
+
+  adicionarAoCarrinho() {
+    if (!this.produto) return;
+
+    // 1. Pega o carrinho que já existe no localStorage ou inicia um array vazio
+    let carrinhoLog = localStorage.getItem('carrinho');
+    let itens: any[] = carrinhoLog ? JSON.parse(carrinhoLog) : [];
+
+    // 2. Verifica se o produto já está no carrinho
+    const itemExistente = itens.find(i => i.id === this.produto.id);
+
+    if (itemExistente) {
+      itemExistente.quantidade += 1; // Soma quantidade se já existir
+    } else {
+      // Adiciona o item montado se for novo
+      itens.push({
+        id: this.produto.id,
+        nome: this.produto.nome,
+        valor: this.produto.valor,
+        quantidade: 1
+      });
+    }
+
+    // 3. Devolve a lista atualizada para o LocalStorage
+    localStorage.setItem('carrinho', JSON.stringify(itens));
+    alert('Produto adicionado ao carrinho');
+  }
 }
