@@ -1,6 +1,10 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { provideRouter } from '@angular/router';
+import { provideLocationMocks } from '@angular/common/testing';
+import { of } from 'rxjs';
 
 import { Carrinho } from './carrinho';
+import { PedidoService } from '../../services/pedido-service';
 
 describe('Carrinho', () => {
   let component: Carrinho;
@@ -8,7 +12,12 @@ describe('Carrinho', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [Carrinho]
+      imports: [Carrinho],
+      providers: [
+        provideRouter([]),
+        provideLocationMocks(),
+        { provide: PedidoService, useValue: { finalizarCompra: () => of({}) } },
+      ]
     })
     .compileComponents();
 

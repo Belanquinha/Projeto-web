@@ -1,0 +1,76 @@
+<div class="container my-4">
+  <h2 class="fw-bold mb-3">{{ editando ? 'Editar Produto' : 'Cadastrar Produto' }}</h2>
+
+  <div *ngIf="mensagem" class="alert alert-info">{{ mensagem }}</div>
+
+  <form #produtoForm="ngForm" (ngSubmit)="salvar(produtoForm)" class="card shadow p-4 bg-body-tertiary rounded-4 mb-4">
+    <div class="row g-3">
+      <div class="col-12">
+        <label class="form-label" for="nome">Nome</label>
+        <input class="form-control" id="nome" type="text" [(ngModel)]="produto.nome" name="nome" required>
+      </div>
+      <div class="col-12">
+        <label class="form-label" for="descritivo">Descrição</label>
+        <textarea class="form-control" id="descritivo" [(ngModel)]="produto.descritivo" name="descritivo" rows="2"></textarea>
+      </div>
+      <div class="col-md-4">
+        <label class="form-label" for="valor">Valor</label>
+        <input class="form-control" id="valor" type="number" step="0.01" min="0" [(ngModel)]="produto.valor" name="valor" required>
+      </div>
+      <div class="col-md-4">
+        <label class="form-label" for="promo">Promo</label>
+        <input class="form-control" id="promo" type="number" step="0.01" min="0" [(ngModel)]="produto.promo" name="promo">
+      </div>
+      <div class="col-md-4">
+        <label class="form-label" for="quantidade">Quantidade</label>
+        <input class="form-control" id="quantidade" type="number" min="0" [(ngModel)]="produto.quantidade" name="quantidade" required>
+      </div>
+      <div class="col-12">
+        <label class="form-label" for="imagem">Imagem (nome do arquivo em <code>public/</code>, ex. <code>img7.webp</code>, ou URL completa)</label>
+        <input class="form-control" id="imagem" type="text" placeholder="img7.webp ou https://..." [(ngModel)]="produto.imagem" name="imagem">
+      </div>
+      <div class="col-12" *ngIf="produto.imagem">
+        <img [src]="produto.imagem" class="img-thumbnail" style="max-height: 150px;" alt="Prévia da imagem">
+      </div>
+    </div>
+    <div class="d-flex gap-2 mt-3">
+      <button type="submit" class="btn btn-laranja-custom text-white fw-bold">
+        {{ editando ? 'Salvar alterações' : 'Cadastrar' }}
+      </button>
+      <button type="button" class="btn btn-secondary" (click)="cancelar(produtoForm)" *ngIf="editando">Cancelar</button>
+    </div>
+  </form>
+
+  <h3 class="fw-bold mb-3">Produtos cadastrados</h3>
+  <div *ngIf="lista.length === 0" class="text-muted">Nenhum produto cadastrado.</div>
+
+  <div class="table-responsive" *ngIf="lista.length > 0">
+    <table class="table table-striped align-middle">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Imagem</th>
+          <th>Nome</th>
+          <th>Valor</th>
+          <th>Promo</th>
+          <th>Qtd</th>
+          <th class="text-end">Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let obj of lista">
+          <td>{{ obj.id }}</td>
+          <td><img [src]="obj.imagem || ('img' + obj.id + '.webp')" style="height: 40px; width: 40px; object-fit: cover;" class="rounded" alt="{{ obj.nome }}"></td>
+          <td>{{ obj.nome }}</td>
+          <td>R$ {{ obj.valor }}</td>
+          <td>R$ {{ obj.promo }}</td>
+          <td>{{ obj.quantidade }}</td>
+          <td class="text-end">
+            <button class="btn btn-sm btn-outline-primary me-2" (click)="editar(obj)">Editar</button>
+            <button class="btn btn-sm btn-outline-danger" (click)="remover(obj.id)">Remover</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

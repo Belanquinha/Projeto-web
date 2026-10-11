@@ -1,6 +1,10 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { provideRouter } from '@angular/router';
+import { provideLocationMocks } from '@angular/common/testing';
+import { of } from 'rxjs';
 
 import { Vitrine } from './vitrine';
+import { ProdutoService } from '../../services/produto-service';
 
 describe('Vitrine', () => {
   let component: Vitrine;
@@ -8,7 +12,15 @@ describe('Vitrine', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [Vitrine]
+      imports: [Vitrine],
+      providers: [
+        provideRouter([]),
+        provideLocationMocks(),
+        {
+          provide: ProdutoService,
+          useValue: { carregarVitrine: () => of([]), pesquisar: () => of([]), listar: () => of([]) },
+        },
+      ]
     })
     .compileComponents();
 

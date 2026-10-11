@@ -8,7 +8,7 @@
           
           <div class="col-12 col-sm-6">
             <div class="p-2 text-center">
-              <img src="img{{produto.id}}.webp" class="img-fluid rounded shadow-sm" alt="{{produto.nome}}">
+              <img [src]="produto.imagem || ('img' + produto.id + '.webp')" class="img-fluid rounded shadow-sm" alt="{{produto.nome}}">
             </div>
           </div>
           

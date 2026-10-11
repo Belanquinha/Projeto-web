@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Cliente } from '../../model/cliente';
 import { FormsModule, NgForm } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
+import { PerfilService } from '../../services/perfil-service';
 
 @Component({
   selector: 'app-cadastro',
@@ -16,12 +16,10 @@ export class Cadastro {
   mensagemCadastro = '';
   codigoCadastro: number | string = '';
 
-  constructor(private http: HttpClient) {}
+  constructor(private perfilService: PerfilService) {}
 
   enviarCadastro(formCadastro: NgForm) {
-    const url = 'http://localhost:8060/perfils';
-
-    this.http.post<any>(url, this.cliente).subscribe({
+    this.perfilService.gravar(this.cliente).subscribe({
       next: (resposta) => {
         console.log('Perfil salvo', resposta);
 

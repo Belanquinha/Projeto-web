@@ -2,8 +2,8 @@ import { Component, ChangeDetectorRef } from '@angular/core';
 import { Cliente } from '../../model/cliente';
 import { FormsModule, NgForm } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { PerfilService } from '../../services/perfil-service';
 
 @Component({
   selector: 'app-login',
@@ -21,13 +21,12 @@ export class Login {
   classeModal = ''; 
 
   // Injete o cdRef no construtor
-  constructor(private http: HttpClient, private router: Router, private cdRef: ChangeDetectorRef) {}
+  constructor(private perfilService: PerfilService, private router: Router, private cdRef: ChangeDetectorRef) {}
 
   tentarLogin(formLogin: NgForm) {
-    const url = 'http://localhost:8060/perfils/login';
     const dadosLogin = { email: this.obj.email, senha: this.obj.senha };
 
-    this.http.post<any>(url, dadosLogin).subscribe({
+    this.perfilService.login(dadosLogin).subscribe({
       next: (usuarioLogado) => {
         this.tituloModal = 'Login realizado';
         this.classeModal = 'btn-laranja-custom'; // Simplificado: apenas a cor de fundo

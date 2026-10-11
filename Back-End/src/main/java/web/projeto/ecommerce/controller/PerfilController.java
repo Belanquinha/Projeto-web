@@ -70,7 +70,6 @@ public class PerfilController {
 
     @PutMapping("/alterar/{id}")
     public ResponseEntity<?> atualizarPerfil(@PathVariable Long id, @RequestBody Perfil perfilDadosNovos) {
-
         return repositorio.findById(id).map(perfilExistente -> {
             perfilExistente.setNome(perfilDadosNovos.getNome());
             perfilExistente.setEmail(perfilDadosNovos.getEmail());
@@ -85,5 +84,15 @@ public class PerfilController {
             return ResponseEntity.ok(perfilAtualizado);
 
         }).orElseGet(() -> ResponseEntity.status(404).build());
+    }
+
+    // Equivale ao DELETE /api/cliente/{id} do exemplo
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> removerPerfil(@PathVariable Long id) {
+        if (repositorio.existsById(id)) {
+            repositorio.deleteById(id);
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.status(404).build();
     }
 }

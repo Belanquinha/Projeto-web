@@ -40,4 +40,30 @@ public class ProdutoController {
     public List<Produto> pesquisarProdutos(@RequestParam("nome") String nome) {
         return repositorio.findByNomeContainingIgnoreCase(nome);
     }
+
+    // Rota para alterar um produto (equivale ao PUT /api/produto do exemplo)
+    @PutMapping("/{id}")
+    public ResponseEntity<Produto> alterarProduto(@PathVariable Long id, @RequestBody Produto produtoDados) {
+        return repositorio.findById(id)
+                .map(produtoExistente -> {
+                    produtoExistente.setNome(produtoDados.getNome());
+                    produtoExistente.setDescritivo(produtoDados.getDescritivo());
+                    produtoExistente.setValor(produtoDados.getValor());
+                    produtoExistente.setPromo(produtoDados.getPromo());
+                    produtoExistente.setQuantidade(produtoDados.getQuantidade());
+                    produtoExistente.setImagem(produtoDados.getImagem());
+                    return ResponseEntity.ok(repositorio.save(produtoExistente));
+                })
+                .orElse(ResponseEntity.notFound().build());
+    }
+
+    // Rota para remover um produto (equivale ao DELETE /api/produto/{codigo} do exemplo)
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> removerProduto(@PathVariable Long id) {
+        if (repositorio.existsById(id)) {
+            repositorio.deleteById(id);
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.notFound().build();
+    }
 }

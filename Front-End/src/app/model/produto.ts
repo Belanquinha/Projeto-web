@@ -5,4 +5,5 @@ export class Produto {
     valor: number = 0;
     promo: number = 0;
     quantidade: number = 0;
+    imagem: string = "";
 }

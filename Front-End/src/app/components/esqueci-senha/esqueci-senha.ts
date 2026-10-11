@@ -1,8 +1,8 @@
 import { Component, ChangeDetectorRef } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
 import { Router, RouterModule } from '@angular/router';
+import { PerfilService } from '../../services/perfil-service';
 
 @Component({
   selector: 'app-esqueci-senha',
@@ -24,7 +24,7 @@ export class EsqueciSenha {
   sucesso = false;
 
   constructor(
-    private http: HttpClient,
+    private perfilService: PerfilService,
     private router: Router,
     private cdr: ChangeDetectorRef
   ) {}
@@ -32,9 +32,7 @@ export class EsqueciSenha {
   processarRecuperacao(form: NgForm) {
     if (form.invalid) return;
 
-    const url = 'http://localhost:8060/perfils/recuperar-senha';
-
-    this.http.put(url, this.dadosRecuperacao).subscribe({
+    this.perfilService.recuperarSenha(this.dadosRecuperacao).subscribe({
       next: () => {
         // Configura modal para SUCESSO
         this.sucesso = true;

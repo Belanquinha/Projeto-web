@@ -19,6 +19,7 @@ public class Produto {
     private BigDecimal valor;
     private BigDecimal promo;
     private Integer quantidade;
+    private String imagem;
 
     public Produto() {}
 
@@ -46,7 +47,10 @@ public class Produto {
     public BigDecimal getPromo() { return promo; }
     public void setPromo(BigDecimal promo) { this.promo = promo; }
 
-    public Integer getQuantity() { return quantidade; }
-    public void setQuantity(Integer quantidade) { this.quantidade = quantidade; }
+    public Integer getQuantidade() { return quantidade; }
+    public void setQuantidade(Integer quantidade) { this.quantidade = quantidade; }
+
+    public String getImagem() { return imagem; }
+    public void setImagem(String imagem) { this.imagem = imagem; }
 }
 

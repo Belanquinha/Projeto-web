@@ -1,7 +1,7 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
 import { Router, RouterModule } from '@angular/router';
+import { PedidoService } from '../../services/pedido-service';
 
 
 @Component({
@@ -17,7 +17,7 @@ export class Carrinho implements OnInit {
   totalPreco: number = 0;
 
   constructor(
-    private http: HttpClient,
+    private pedidoService: PedidoService,
     private router: Router,
     private cdr: ChangeDetectorRef
   ) {}
@@ -49,8 +49,6 @@ export class Carrinho implements OnInit {
       return;
     }
 
-    const url = 'http://localhost:8060/pedidos';
-
     // Mapeia os dados do localStorage para o formato que as entidades do Java esperam
     const corpoPedido = {
       itens: this.itensCarrinho.map(item => ({
@@ -60,7 +58,7 @@ export class Carrinho implements OnInit {
       }))
     };
 
-    this.http.post(url, corpoPedido).subscribe({
+    this.pedidoService.finalizarCompra(corpoPedido).subscribe({
       next: (resposta) => {
         alert('Compra concluída com sucesso!');
         localStorage.removeItem('carrinho'); // Limpa após fechar

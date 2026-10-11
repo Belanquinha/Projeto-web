@@ -2,7 +2,7 @@ import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Produto } from '../../model/produto';
 import { CommonModule } from '@angular/common';
-import { HttpClient } from '@angular/common/http'; // Injetado HttpClient
+import { ProdutoService } from '../../services/produto-service';
 
 @Component({
   selector: 'app-pagina-produto',
@@ -17,7 +17,7 @@ export class PaginaProduto implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private http: HttpClient,
+    private produtoService: ProdutoService,
     private cdr: ChangeDetectorRef
   ) {}
 
@@ -32,9 +32,7 @@ export class PaginaProduto implements OnInit {
   }
 
   carregarProdutoDoBackend(id: number) {
-    const url = `http://localhost:8060/produtos/${id}`;
-
-    this.http.get<any>(url).subscribe({
+    this.produtoService.carregar(id).subscribe({
       next: (produtoDoBanco) => {
         this.produto = produtoDoBanco;
         console.log('Produto carregado com sucesso:', this.produto);

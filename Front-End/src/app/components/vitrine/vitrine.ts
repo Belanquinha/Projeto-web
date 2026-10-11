@@ -2,7 +2,7 @@ import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Produto } from '../../model/produto';
 import { Router, ActivatedRoute } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
+import { ProdutoService } from '../../services/produto-service';
 
 @Component({
   selector: 'app-vitrine',
@@ -16,7 +16,7 @@ export class Vitrine implements OnInit {
 
   constructor(
     private router: Router,
-    private http: HttpClient,
+    private produtoService: ProdutoService,
     private route: ActivatedRoute,
     private cdr: ChangeDetectorRef
   ) {}
@@ -33,15 +33,13 @@ export class Vitrine implements OnInit {
   }
 
   carregarProdutosDaVitrine() {
-    this.http.get<any[]>('http://localhost:8060/produtos').subscribe({
+    this.produtoService.carregarVitrine().subscribe({
       next: (dados) => { this.lista = dados; this.cdr.detectChanges(); }
     });
   }
 
   filtrarProdutosPorNome(nome: string) {
-    const url = `http://localhost:8060/produtos/pesquisar?nome=${nome}`;
-    
-    this.http.get<any[]>(url).subscribe({
+    this.produtoService.pesquisar(nome).subscribe({
       next: (dadosFiltrados) => {
         this.lista = dadosFiltrados;
         this.cdr.detectChanges();
